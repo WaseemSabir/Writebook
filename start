@@ -1,3 +1,12 @@
 sudo apt -y install screen
 
-screen -s 
+python3 -m venv env
+source env/bin/activate
+cd serverApp
+pip install -r requirements.txt
+screen -d -m python3 manage.py runserver
+
+cd ..
+cd clientApp
+npm install
+screen -d -m ng serve
