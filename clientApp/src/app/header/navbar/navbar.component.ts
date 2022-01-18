@@ -22,12 +22,13 @@ export class NavbarComponent implements OnInit {
   }
   public documents : any[] = []
 
-  constructor(private auth : AuthService, private general : GeneralService, private router : Router, private document : DocumentApiService) { }
+  constructor(private auth : AuthService, private general : GeneralService, private router : Router, private document : DocumentApiService) {
+    this.auth.checkUser()
+  }
 
   ngOnInit(): void {
     this.auth.loggedIn$.subscribe((logged : boolean)=>{
       this.loggedIn = logged;
-      console.log(this.loggedIn)
     })
 
     this.auth.user$.subscribe((data : personData)=>{

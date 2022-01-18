@@ -94,14 +94,16 @@ export class WriteAppComponent implements OnInit {
 
   exportAsPDF(divId : any)
   {
-    let data = document.getElementById(divId);  
+    var data = document.getElementById(divId);
     html2canvas(data!).then(canvas => {
+      var imgWidth = 208;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
       const contentDataURL = canvas.toDataURL('image/png')
-      let pdf = new jsPDF('l', 'cm', 'a4');
-      pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);  
-      pdf.save(`${this.doc.title}.pdf`);   
-      this.general.createMessage('success','downloaded')
-    }); 
+      let pdf = new jsPDF('p', 'mm', 'a4');
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('newPDF.pdf');
+    });
   }
 
   downloadRequest() {
