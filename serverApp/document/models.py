@@ -15,7 +15,7 @@ class Document(TimeStampMixin):
     owners = models.ManyToManyField(User)
 
     class Meta:
-        ordering = ['updated_at']
+        ordering = ['-updated_at']
 
     def __str__(self):
         return self.title
@@ -27,7 +27,7 @@ class Section(TimeStampMixin):
     document = models.ForeignKey(Document, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ['level']
+        ordering = ['-id']
 
     def __str__(self):
         return self.name

@@ -86,15 +86,33 @@ class SectionParentViews(GenericAPIView):
         else:
             parent = None
 
-        if not parent.document in Document.objects.filter(owners=user):
+        doc_obj = Document.objects.filter(id=doc, owners=user).first()
+        if not doc_obj:
             return Response({'details':'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
         
-        relations = SectionRelations.objects.filter(parent=parent)
-        childs = map(lambda x: x.child, relations)
+        if not parent:
+            relations = SectionRelations.objects.filter(parent__isnull=True, document=doc_obj)
+        else:
+            relations = SectionRelations.objects.filter(parent=parent, document=doc_obj)
+        
+        childs = []
+        for relation in relations:
+            childs.append(relation.child)
+
+        hasChilds = []
+        for child in childs:
+            child_of_child = SectionRelations.objects.filter(parent=child)
+            if len(child_of_child):
+                hasChilds.append(True)
+            else:
+                hasChilds.append(False)
 
         serialized = SectionSerializer(childs, many=True)
+        data = serialized.data
+        for child_obj in data:
+            child_obj['hasChildren'] = hasChilds.pop(0)
 
-        return Response(serialized.data, status=status.HTTP_200_OK)
+        return Response(data, status=status.HTTP_200_OK)
      
     # creates a new section using parent id. Send pid=0 if no parent
     def post(self, request, pid, doc):
@@ -182,13 +200,25 @@ class DocumentViews(GenericAPIView):
         except:
             return Response({'detail': 'error in updating documents'}, status=status.HTTP_400_BAD_REQUEST)
 
-    # delete a document
-    def delete(self, request):
+class DocumentWithIdViews(GenericAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, id):
         user = request.user
-        data = request.data
+
+        doc = Document.objects.filter(id=id, owners=user).first()
+        if doc:
+            serialized = DocumentSerializer(doc)
+            return Response(serialized.data,status=status.HTTP_200_OK)
+
+        return Response({'detail': 'unauthorized or doc not found'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # delete a document
+    def delete(self, request, id):
+        user = request.user
 
         try:
-            id = data["id"]
+            id = id
         except:
             return Response({'detail': 'required data not submiited'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -198,6 +228,96 @@ class DocumentViews(GenericAPIView):
             return Response(status=status.HTTP_200_OK)
         except:
             return Response({'detail': 'unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
+
+def rec_document_build(pid, doc):
+    if pid:
+        try:
+            parent = Section.objects.get(pk=pid)
+        except:
+            return Response({'details':'invalid parent section'}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        parent = None
+    
+    if not parent:
+        relations = SectionRelations.objects.filter(parent__isnull=True, document=doc)
+    else:
+        relations = SectionRelations.objects.filter(parent=parent, document=doc)
+    
+    childs = []
+    for relation in relations:
+        childs.append(relation.child)
+
+    serilized = SectionSerializer(childs, many=True)
+
+    for one in serilized.data:
+        id = one.get("id")
+        one['children'] = rec_document_build(id, doc)
+
+    return serilized.data
+    
+
+class DocumentFullView(GenericAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, doc):
+        user = request.user
+
+        d = Document.objects.filter(id=doc, owners=user).first()
+        if not d:
+            return Response({"details":"Document not found or Unauthorized"}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(rec_document_build(0, d))
+
+def preview_document_build(pid, doc, sectionLevel):
+    if pid:
+        try:
+            parent = Section.objects.get(pk=pid)
+        except:
+            return Response({'details':'invalid parent section'}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        parent = None
+    
+    if not parent:
+        relations = SectionRelations.objects.filter(parent__isnull=True, document=doc)
+    else:
+        relations = SectionRelations.objects.filter(parent=parent, document=doc)
+    
+    childs = []
+    for relation in relations:
+        childs.append(relation.child)
+
+    serilized = SectionSerializer(childs, many=True)
+
+    if pid:
+        preview_build = f"<p class='h5 py-2'>{sectionLevel}: {parent.name}</p>{parent.data}"
+    else:
+        preview_build = ""
+
+    count = 1
+    for one in serilized.data:
+        id = one.get("id")
+        to_add = ""
+        if len(sectionLevel):
+            to_add = f".{count}"
+        else:
+            to_add = f"{count}"
+        preview_build += preview_document_build(id, doc, sectionLevel+to_add)
+        count +=1
+
+    return preview_build
+
+class DocumentPreview(GenericAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, doc):
+        user = request.user
+
+        d = Document.objects.filter(id=doc, owners=user).first()
+        if not d:
+            return Response({"details":"Document not found or Unauthorized"}, status=status.HTTP_400_BAD_REQUEST)
+
+        to_ret = f"<p class='h3 text-center'>{d.title}</p>{preview_document_build(0, d, '')}"
+        return Response(to_ret,status=status.HTTP_200_OK)
 
 
 class OwnerShipViews(GenericAPIView):

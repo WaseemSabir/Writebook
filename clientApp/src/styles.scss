@@ -1,0 +1,91 @@
+@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-icons/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-lists/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-richtexteditor/styles/material.css";
+
+@media screen and (min-width: 768px) {
+    .navbar {
+        box-shadow: none !important;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        box-shadow: none !important;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        margin: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: 3%;
+        padding-right: 1%;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Helvetica, "Helvetica Neue", sans-serif;
+}
+
+.white-color {
+    color: white;
+}
+
+.blue-color {
+    color: #006699;
+}
+
+.black-color {
+    color: black;
+}
+
+.yellow-color {
+    color: #fabf01;
+}
+
+.seconday-blue {
+    color: #f5f7fb;
+}
+
+.white-color {
+    color: white;
+}
+
+.light-bg {
+    background-color: #f5f7fb;
+}
+
+.dark-bg {
+    background-color: #006699;
+}
+
+.dark-bg2 {
+    background-color: #006699;
+}
+
+.pointer {
+    cursor: pointer;
+}
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

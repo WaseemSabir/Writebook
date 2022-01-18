@@ -1,0 +1,9 @@
+.full-page {
+    height: calc(100% - 65px);
+}
+
+img {
+    vertical-align: middle;
+    transform: rotateY(-15deg) translateY(-42px) rotateX(11deg) scale(1.1);
+    margin-left: 10%;
+}

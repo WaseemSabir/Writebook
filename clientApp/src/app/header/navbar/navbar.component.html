@@ -1,0 +1,47 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg pt-3 navbar-light w-100" [containerInside]="false">
+  <mdb-navbar-brand>
+    <a class="ml-auto navbar-brand" [href]="appURL">
+      <!-- <img src="/assets/workire-logo.svg" title="Home" width="120" alt="Workire"
+        class="d-inline-block align-middle mb-2"> -->
+        <div class="sidebar-logo">
+          <img src="/assets/pen-logo.png" alt="logo">
+          <h1>WriteBook</h1>
+        </div>
+    </a>
+  </mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links class="ml-5">
+
+    <ul class="navbar-nav ml-auto ml-n3 nav-flex-icons">
+      <li *ngIf="!loggedIn" class="nav-item mr-2">
+        <button nz-button nzType="default" [routerLink]="['/login']">Login</button>
+      </li>
+      <li *ngIf="!loggedIn" class="nav-item mr-2">
+        <button nz-button nzType="default" [routerLink]="['/register']">Register</button>
+      </li>
+      <li *ngIf="loggedIn" class="nav-item mr-2">
+        <button nz-button nzType="link" nz-dropdown [nzDropdownMenu]="menu">
+          Documents
+        </button>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item *ngFor="let doc of documents" (click)="docClick(doc.id)">
+              {{doc.title}}
+            </li>
+          </ul>
+        </nz-dropdown-menu>
+      </li>
+      <li *ngIf="loggedIn" class="nav-item mr-2">
+        <button nz-button nz-popover nzType="text" [nzPopoverTitle]="userData.first_name+' '+userData.last_name"
+          [nzPopoverContent]="userData.username">
+          <i nz-icon nzType="user" nzTheme="outline"></i>
+        </button>
+      </li>
+      <li *ngIf="loggedIn" class="nav-item mr-2">
+        <button nz-button nzType="default" (click)="logoutHandler()">Logout</button>
+      </li>
+    </ul>
+  </links>
+  <!-- Collapsible content -->
+</mdb-navbar>

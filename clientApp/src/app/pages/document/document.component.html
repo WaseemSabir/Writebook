@@ -1,0 +1,79 @@
+<div class="light-bg box-height">
+    <p class="container pt-4 pb-2 h4">Documents</p>
+    <nz-list class="demo-loadmore-list" style="background-color: white;" class="container rounded">
+        <nz-list-item *ngFor="let item of documents">
+            <ng-container>
+                <nz-list-item-meta nzDescription="Updated at {{parseDate(item.updated_at)}}">
+                    <nz-list-item-meta-title>
+                        <a href="/document/{{item.id}}">{{item.title}}</a>
+                    </nz-list-item-meta-title>
+                </nz-list-item-meta>
+
+                <!-- content -->
+                <ul nz-list-item-actions>
+                    <nz-list-item-action>
+                        <button nz-button nzType="text" (click)="editClick(item)">edit</button>
+                    </nz-list-item-action>
+
+                    <nz-list-item-action>
+                        <button nz-button nzType="text" (click)="shareClick(item)">share</button>
+                    </nz-list-item-action>
+
+                    <nz-list-item-action>
+                        <button nz-button nzType="text" (click)="showDeleteConfirm(item)">delete</button>
+                    </nz-list-item-action>
+                </ul>
+            </ng-container>
+        </nz-list-item>
+    </nz-list>
+
+    <div class="container">
+        <button *ngIf="!new_doc_bool" nz-button nzType="link" (click)="createNewDocClick()">Create new doc</button>
+        <div class="w-25" *ngIf="new_doc_bool" >
+            <input nz-input placeholder="Title of new document" type="text" class="w-100 my-2 py-1" [(ngModel)]="new_title" />
+            <br>
+            <div style="margin-right: auto;">
+                <button nz-button [nzType]='"primary"' type="submit"
+                (click)="createNewDoc()" [nzLoading]="editLoaded">save</button>
+                <button nz-button [nzType]='"default"' class="mx-2" type="submit"
+                    (click)="cancelNewDocument()" [nzLoading]="editLoaded">cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nz-modal [(nzVisible)]="isEditVisible || isShareVisible" [nzTitle]="modalTitle" [nzContent]="modalContent"
+    [nzFooter]="null" (nzOnCancel)="handleCancel()">
+    <ng-template #modalTitle>
+        <div *ngIf="isEditVisible">
+            Edit
+        </div>
+        <div *ngIf="isShareVisible">
+            Share
+        </div>
+    </ng-template>
+
+    <ng-template #modalContent>
+        <div *ngIf="isEditVisible">
+            <input nz-input placeholder="new_title" type="text" class="w-100 my-2 py-1" [(ngModel)]="new_title" />
+            <br>
+            <button nz-button class="btn btn-primary btn-block my-2" type="submit"
+                (click)="saveNewTitle()" [nzLoading]="editLoaded">save</button>
+        </div>
+        <div *ngIf="isShareVisible">
+            <input nz-input placeholder="Search User" type="text" class="w-100 my-2 py-1" [(ngModel)]="to_search_user" (ngModelChange)="searchUsers()"/>
+            <br>
+            <ul nz-list [nzDataSource]="users" nzBordered nzSize="small">
+                <li nz-list-item *ngFor="let item of users" nzNoFlex>
+                  <ul nz-list-item-actions>
+                    <nz-list-item-action>
+                      <button nz-button nzType="primary" (click)="addNewUser(item.username)">add</button>
+                    </nz-list-item-action>
+                  </ul>
+                    <span>{{item.first_name+" "+item.last_name}}</span>
+                    <span>{{", "+item.username}}</span>
+                </li>
+            </ul>          
+        </div>
+    </ng-template>
+</nz-modal>

@@ -1,0 +1,24 @@
+<div class="light-bg box-height">
+    <mat-card class="" style="margin: 0 auto;width: 30%;">
+        <div class="bg-white p-5" style="margin-top: 18%;">
+            <p class="h5">Register</p>
+            <input nz-input placeholder="First Name" class="w-100 my-2 py-1" [(ngModel)]="first" />
+            <br>
+            <input nz-input placeholder="Last Name" class="w-100 my-2 py-1" [(ngModel)]="last" />
+            <br>
+            <input nz-input placeholder="Username" class="w-100 my-2 py-1" [(ngModel)]="username" />
+            <br>
+            <input nz-input placeholder="Password" type="password" class="w-100 my-2 py-1" [(ngModel)]="password" />
+            <br>
+            <button class="btn btn-primary btn-block my-2" type="submit" (click)="submitHandler()">Register</button>
+            <div class="my-3 row">
+                <div class="col-9">
+                    <label nz-checkbox [(ngModel)]="checkbox"> Remember me</label>
+                </div>
+                <div class="col-3">
+                    <a class="link-primary" href="/login">Login</a>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</div>

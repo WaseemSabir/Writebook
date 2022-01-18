@@ -14,7 +14,6 @@ class SectionSerializer(serializers.ModelSerializer):
         fields = ['id','created_at','updated_at','name','data','level','document']
 
     def validate(self, attrs):
-        print("Hello")
         return super().validate(attrs)
         
     def create(self, validated_data):
