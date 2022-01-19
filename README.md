@@ -6,7 +6,7 @@ WriteBook is built with angular and django rest framework and has basic dependen
 
 ```bash
 git clone https://github.com/WaseemSabir/Writebook.git # or you can unzip the code
-cd WriteBook # skip if terminal opened inside project folder
+cd Writebook # skip if terminal opened inside project folder
 ```
 
 create an python enviorment and install server dependencies and run server:
