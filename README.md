@@ -24,7 +24,7 @@ To serve the application, you will need angular cli that you can install with fo
 npm install -g @angular/cli
 ```
 
-go back to project folder (in terminal with `cd ..` ), and run following commands to start the client application.
+Open another terminal inside WriteBook folder and run following commands to serve client application:
 ```bash
 cd clientApp
 npm install
