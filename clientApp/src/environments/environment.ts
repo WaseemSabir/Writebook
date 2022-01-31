@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiURL: "https://writebook.herokuapp.com",
-  appURL: "https://writebook.vercel.app"
+  apiURL: "http://127.0.0.1:8000",
+  appURL: "http://localhost:4200"
 
 };
 
