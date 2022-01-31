@@ -36,5 +36,5 @@ This will start a server at http://localhost:4200, go to the url to use the appl
 
 You can create a new account or use following credentials that has some documents added already.
 
-Username: `squibler`
-Password: `squibler@1122`
+Username: `WaseemSabir`
+Password: `temp@1122`
