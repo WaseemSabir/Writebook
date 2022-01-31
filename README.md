@@ -1,5 +1,5 @@
 # Writebook
-[Writebook](https://writebook.vercel.app/) is application that makes it easier for you to write documents. The documents have section, subsection hiearchy and can be edited, shared and downloaded with an intuitive user interfece. App can be accessed [here](https://writebook.vercel.app/).
+[Writebook](https://writebook.vercel.app/) is application that makes it easier for you to write documents. The documents have section, subsection hiearchy and can be edited, shared and downloaded with an intuitive user interfece. App can be accessed [here](https://writebook.vercel.app/). And you can view the example of app functionality [here](https://github.com/WaseemSabir/Writebook/tree/master/ScreenShots).
 
 [![alt text](https://i.ibb.co/Gk2Fnzf/write-Book-appshot.png)](https://writebook.vercel.app/)
 ## Getting Started
@@ -33,8 +33,3 @@ ng serve
 ```
 
 This will start a server at http://localhost:4200, go to the url to use the application.
-
-You can create a new account or use following credentials that has some documents added already.
-
-Username: `WaseemSabir`
-Password: `temp@1122`
