@@ -1,6 +1,7 @@
 # Writebook
-Writebook is application that makes it easier for you to write documents. The documents have section, subsection hiearchy and can be edited, shared and downloaded with an intuitive user interfece. 
+[Writebook](https://writebook.vercel.app/) is application that makes it easier for you to write documents. The documents have section, subsection hiearchy and can be edited, shared and downloaded with an intuitive user interfece. App can be accessed [here](https://writebook.vercel.app/).
 
+[![alt text](https://i.ibb.co/Gk2Fnzf/write-Book-appshot.png)](https://writebook.vercel.app/)
 ## Getting Started
 WriteBook is built with angular and django rest framework and has basic dependencies of [node](https://nodejs.org/en/), npm, [python](https://www.python.org/) and pip. After you have those dependencies  installed, open the terminal and run following commands to get started.
 
