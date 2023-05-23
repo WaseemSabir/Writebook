@@ -15,9 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+
+@api_view()
+def hello_world(request):
+    return Response({"message": "Okay 👍"})
+
 
 urlpatterns = [
+    path('', hello_world),
     path('admin/', admin.site.urls),
-    path('api/auth/',include('authentication.urls')),
-    path('api/',include('document.urls'))
+    path('api/auth/', include('authentication.urls')),
+    path('api/', include('document.urls'))
 ]
