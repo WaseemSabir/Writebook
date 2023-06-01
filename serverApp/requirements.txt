@@ -1,16 +1,19 @@
-asgiref==3.4.1
-backports.zoneinfo==0.2.1
+asgiref @ file:///tmp/build/80754af9/asgiref_1625643473416/work
+backports.zoneinfo @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_ce_j7dts93/croots/recipe/backports.zoneinfo_1661287536126/work
 cffi==1.15.0
 cryptography==36.0.1
 Django==4.0.1
-django-cors-headers==3.11.0
+django-cors-headers @ file:///home/conda/feedstock_root/build_artifacts/django-cors-headers_1641858895663/work
 django-environ==0.8.1
-djangorestframework==3.13.1
+djangorestframework @ file:///home/conda/feedstock_root/build_artifacts/djangorestframework_1639677796037/work
 djangorestframework-simplejwt==5.0.0
+gunicorn==20.1.0
 jwt==1.3.1
+psycopg2 @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_b5vqnh3a1_/croot/psycopg2_1666817457480/work
 pycparser==2.21
 PyJWT==2.3.0
-pytz==2021.3
+pytz @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_c56ru3yml9/croot/pytz_1671697451306/work
 six==1.16.0
-sqlparse==0.4.2
+sqlparse @ file:///home/conda/feedstock_root/build_artifacts/sqlparse_1631317292236/work
 trollius==2.1.post2
+typing_extensions @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_19t7k81exs/croot/typing_extensions_1681939523533/work
